@@ -1,21 +1,21 @@
-#apiVersion: scaffolder.backstage.io/v1beta3
-#kind: Template
-#metadata:
-#  name: Static Site Publish
-#  title: Static Site Publish 
-#  description: PR to create AWS SQS Queue
-#  tags:
-#    - platform
-#    - terraform
-#    - aws
-#    - static-site
-#  links:
-#    - title: Documentation
-#      url: https://backstage.io/docs/features/software-templates
-#      icon: docs
-#spec:
-#  owner: platform_team
-#  type: infra-a-code
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: Static Site Publish
+  title: Static Site Publish 
+  description: PR to create AWS SQS Queue
+  tags:
+    - platform
+    - terraform
+    - aws
+    - static-site
+  links:
+    - title: Documentation
+      url: https://backstage.io/docs/features/software-templates
+      icon: docs
+spec:
+  owner: platform_team
+  type: infra-a-code
   parameters:
     - title: Qual o nome da distribuição?
       required:
