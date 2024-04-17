@@ -15,7 +15,7 @@ metadata:
       icon: docs
 spec:
   owner: platform_team
-  type: infra-a-code
+  type: infra-as-code
   parameters:
     - title: Qual o nome da distribuição?
       required:

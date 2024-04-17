@@ -9,9 +9,15 @@ backend:
   # Used for enabling authentication, secret is shared by all backend plugins
   # See https://backstage.io/docs/auth/service-to-service-auth for
   # information on the format
-  # auth:
-  #   keys:
-  #     - secret: ${BACKEND_SECRET}
+  #auth:
+    #keys:
+    #  - secret: teste-local
+    #providers:
+    #  guest:
+    #    dangerouslyAllowOutsideDevelopment: true
+
+
+  #auth.providers.guest.dangerouslyAllowOutsideDevelopment: true
   baseUrl: http://localhost:7007
   listen:
     port: 7007
@@ -83,8 +89,8 @@ catalog:
       target: ../../examples/entities.yaml
 
     # Local example template
-    - type: file
-      target: ../../examples/template/template.yaml
+    - type: url
+      target: https://github.com/fillipepaz/backstage-project/blob/main/examples/template/static_site_template.yaml
       rules:
         - allow: [Template]
 
@@ -98,7 +104,7 @@ catalog:
     # - type: url
     #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all.yaml
 
-    ## Uncomment these lines to add an example org
+    # Uncomment these lines to add an example org
     # - type: url
     #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
     #   rules:
