@@ -71,7 +71,7 @@ spec:
       action: fetch:template
       input:
         targetPath: ./templates/outputs
-        url: https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site/template/main.tf
+        url: https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site/template
         values:
           project: ${{ parameters.project }}
           distribution_name: ${{ parameters.distribution_name }}
