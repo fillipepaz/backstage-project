@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: Static Site Publish
+  name: Static-Site
   title: Static Site Publish 
   description: PR to create AWS SQS Queue
   tags:
