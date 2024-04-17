@@ -1,0 +1,121 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: Static Site Publish
+  title: Static Site Publish 
+  description: PR to create AWS SQS Queue
+  tags:
+    - platform
+    - terraform
+    - aws
+    - static-site
+  links:
+    - title: Documentation
+      url: https://backstage.io/docs/features/software-templates
+      icon: docs
+spec:
+  owner: platform_team
+  type: infra-a-code
+
+  parameters:
+    - title: Qual o nome da distribuição?
+     required:
+        - distribution_name
+        - repository
+        - project
+        - account
+      properties:
+        distribution_name:
+          title: Nome da distribuição
+          type: string
+          description: |
+            The name of the queue
+
+        environment:
+          title: A qual ambiente se refere?
+          type: string
+          description: A qual ambiente se refere?
+          default: Production
+          enum: [Production, Staging, Development]
+        
+        account:
+          title: Qual o número da conta?
+          type: string
+          description: Qual o número da conta?
+          
+
+        project:
+          title: A qual projeto se refere? 
+          type: string
+          description: Informe o nome do projeto ao qual se refere esse provisionamento.
+        
+        repository:
+          title: Qual repositório contém o site estático?
+          type: string
+          description: Org/NomeDoRepositorio.
+          
+    - title: Qual a squad responsável por esse projeto?
+      properties:
+        squad:
+          title: Squad
+          type: string
+          description: |
+            Selecione a squad responsável por esse projeto.
+          ui:field: OwnerPicker
+          ui:options:
+            allowedKinds:
+              - group
+
+  steps:
+    - id: template
+      name: Captura o template do módulo
+      action: fetch:template
+      input:
+        targetPath: ./templates/outputs
+        url: https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site/template/main.tf
+        values:
+          project: ${{ parameters.project }}
+          distribution_name: ${{ parameters.distribution_name }}
+          environment: ${{ parameters.environment }}
+          squad: ${{ parameters.squad }}
+          repository: ${{ parameters.repository }}
+          account: ${{ parameters.account }}
+
+    - id: show_workspace
+      name: Show workspace files
+      action: debug:log
+      input:
+        listWorkspace: true
+  
+    - id: terraform_pr
+      name: Create terraform PR
+      action: publish:github:pull-request
+      input:
+        repoUrl: github.com?owner=fillipepaz&repo=infrastructure-versioning
+        branchName: 'feat/${{ parameters.project }}/${{ parameters.environment }}/static-site'
+        title: 'Criando Site Estático para o projeto ${{ parameters.project }} no ambiente ${{ parameters.environment }}'
+        description: |
+          ## 'Criando Site Estático para o projeto ${{ parameters.project }} no ambiente ${{ parameters.environment }}'
+          [![N|Solid](https://devopsdays.org/events/2024-aracaju/logo.png)]
+         
+        sourcePath: ./templates/outputs
+        targetPath: 'aws/${{ parameters.environment }}/static-site/${{ parameters.project }}'
+
+    - id: label_pr
+      name: Add labels to PR
+      action: github:issues:label
+      input:
+        repoUrl: github.com?owner=fillipepaz&repo=infrastructure-versioning
+        number: '${{ steps.terraform_pr.output.pullRequestNumber }}'
+        labels:
+          - IaC
+          - Platform Team
+          - ${{ parameters.environment }}
+          - static-site
+
+  output:
+    links:
+      - title: 'Link para o pull request'
+        url: ${{ steps.terraform_pr .output.remoteUrl }}
+        icon: github
+      
