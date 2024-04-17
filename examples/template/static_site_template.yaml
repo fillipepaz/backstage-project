@@ -18,7 +18,7 @@
 #  type: infra-a-code
   parameters:
     - title: Qual o nome da distribuição?
-     required:
+      required:
         - distribution_name
         - repository
         - project
