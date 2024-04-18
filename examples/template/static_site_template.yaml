@@ -10,7 +10,7 @@ metadata:
     - aws
     - static-site
   links:
-    - title: Documentation
+    - title: Documentação
       url: https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site/template/terraform
       icon: docs
 spec:
