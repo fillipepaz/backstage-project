@@ -3,7 +3,7 @@ kind: Template
 metadata:
   name: Static-Site
   title: Estrutura para Client-Side Website
-  description: Provisionamento estrutura para site client-side.
+  description: Provisionamento de estrutura para site client-side.
   tags:
     - platform
     - terraform
