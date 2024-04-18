@@ -2,8 +2,8 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: Static-Site
-  title: Static Site Publish 
-  description: PR para provisionamento de site estatico
+  title: Estrutura para Client-Side Website
+  description: Provisionamento estrutura para site client-side.
   tags:
     - platform
     - terraform
@@ -11,7 +11,7 @@ metadata:
     - static-site
   links:
     - title: Documentation
-      url: https://backstage.io/docs/features/software-templates
+      url: https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site/template/terraform
       icon: docs
 spec:
   owner: platform_team
