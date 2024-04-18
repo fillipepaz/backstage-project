@@ -13,7 +13,7 @@ kind: Group
 metadata:
   name: Marketing
 spec:
-  type: team
+  type: Group
   children: []
 
 ---
@@ -23,7 +23,7 @@ kind: Group
 metadata:
   name: Vendas
 spec:
-  type: team
+  type: Group
   children: []
 ---
 apiVersion: backstage.io/v1alpha1
@@ -31,7 +31,7 @@ kind: Group
 metadata:
   name: Juridico
 spec:
-  type: team
+  type: Group
   children: []
 
 ---
@@ -41,5 +41,5 @@ kind: Group
 metadata:
   name: Produtos
 spec:
-  type: team
+  type: Group
   children: []
