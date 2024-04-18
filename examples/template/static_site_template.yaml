@@ -60,7 +60,7 @@ spec:
       action: fetch:template
       input:
         targetPath: ./templates/outputs
-        url: https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site/template-tf
+        url: https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site/template
         values:
           project: ${{ parameters.project }}
           distribution_name: ${{ parameters.distribution_name }}
@@ -134,6 +134,6 @@ spec:
         icon: github
       
       - title: 'Link para o pull request do Github Actions'
-        url: ${{ steps.terraform_pr .output.remoteUrl }}
+        url: ${{ steps.gha_pr.output.remoteUrl }}
         icon: github
       
