@@ -54,13 +54,28 @@ spec:
               - group
 
   steps:
-    - id: template
-      name: Captura o template do módulo
+    - id: template_tf
+      name: Captura o template do módulo terraform
       #if: ${{ parameters.environment === "Production" }}
       action: fetch:template
       input:
-        targetPath: ./templates/outputs
-        url: https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site/template
+        targetPath: ./templates/outputs/tf
+        url: https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site/template/terraform
+        values:
+          project: ${{ parameters.project }}
+          distribution_name: ${{ parameters.distribution_name }}
+          environment: ${{ parameters.environment }}
+          squad: ${{ parameters.squad }}
+          repository: ${{ parameters.repository }}
+          account: "704151674151"
+    
+    - id: template_gha
+      name: Captura o template do workflow
+      #if: ${{ parameters.environment === "Production" }}
+      action: fetch:template
+      input:
+        targetPath: ./templates/outputs/gha
+        url: https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site/template/gha
         values:
           project: ${{ parameters.project }}
           distribution_name: ${{ parameters.distribution_name }}
@@ -86,7 +101,7 @@ spec:
           ## 'Criando Site Estático para o projeto ${{ parameters.project }} no ambiente ${{ parameters.environment }}'
           [![N|Solid](https://devopsdays.org/events/2024-aracaju/logo.png)]
          
-        sourcePath: ./templates/outputs/*.tf
+        sourcePath: ./templates/outputs/tf
         targetPath: 'aws/${{ parameters.environment }}/static-site/${{ parameters.project }}'
   
     - id: gha_pr
@@ -100,7 +115,7 @@ spec:
           ## 'Criando Workflow do Github Actions para o projeto ${{ parameters.project }} no ambiente ${{ parameters.environment }}'
           [![N|Solid](https://devopsdays.org/events/2024-aracaju/logo.png)]
          
-        sourcePath: ./templates/outputs/*.yaml
+        sourcePath: ./templates/outputs/gha
         targetPath: '.github/workflows'
 
     - id: label_pr
