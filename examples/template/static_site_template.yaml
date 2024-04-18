@@ -68,10 +68,11 @@ spec:
           squad: ${{ parameters.squad }}
           repository: ${{ parameters.repository }}
           account: "704151674151"
+          org: "fillipepaz"
     
     - id: template_gha
       name: Captura o template do workflow
-      #if: ${{ parameters.environment === "Production" }}
+      if: ${{ parameters.environment === "Production" }}
       action: fetch:template
       input:
         targetPath: ./templates/outputs/gha
