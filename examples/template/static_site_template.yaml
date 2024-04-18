@@ -85,11 +85,11 @@ spec:
           repository: ${{ parameters.repository }}
           account: "704151674151"
 
-    - id: show_workspace
-      name: Show workspace files
-      action: debug:log
-      input:
-        listWorkspace: true
+    #- id: show_workspace
+    #  name: Show workspace files
+    #  action: debug:log
+    #  input:
+    #    listWorkspace: true
   
     - id: terraform_pr
       name: Create terraform PR
@@ -99,8 +99,16 @@ spec:
         branchName: 'feat/${{ parameters.project }}/${{ parameters.environment }}/static-site'
         title: 'Criando Site Estático para o projeto ${{ parameters.project }} no ambiente ${{ parameters.environment }}'
         description: |
-          ## 'Criando Site Estático para o projeto ${{ parameters.project }} no ambiente ${{ parameters.environment }}'
-          [![N|Solid](https://devopsdays.org/events/2024-aracaju/logo.png)]
+          ### 'Criando Site Estático para o projeto ${{ parameters.project }} no ambiente ${{ parameters.environment }}'
+          #### Platform Engineering Team
+          ![C|Solid](https://media.licdn.com/dms/image/C4D03AQFrRACeL-3RzQ/profile-displayphoto-shrink_200_200/0/1549336419509?e=2147483647&v=beta&t=feIcq_ZKeMNcXd9xjl7ez6TLcIA0vS-8q6vqePrnz1g)
+          | Atributo | Valor |
+          | ------ | ------ |
+          | Owner do projeto | ${{ parameters.squad }} |
+          | Projeto | ${{ parameters.project }} |
+          | Repositório do Site | fillipepaz/${{ parameters.repository }} |
+          | Ambiente | ${{ parameters.environment }} |
+          | Arquitetura | https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site |
          
         sourcePath: ./templates/outputs/tf
         targetPath: 'aws/${{ parameters.environment }}/static-site/${{ parameters.project }}'
@@ -114,7 +122,14 @@ spec:
         title: 'Criando Workflow para o projeto ${{ parameters.project }} no ambiente ${{ parameters.environment }}'
         description: |
           ## 'Criando Workflow do Github Actions para o projeto ${{ parameters.project }} no ambiente ${{ parameters.environment }}'
-          [![N|Solid](https://devopsdays.org/events/2024-aracaju/logo.png)]
+          ![C|Solid](https://media.licdn.com/dms/image/C4D03AQFrRACeL-3RzQ/profile-displayphoto-shrink_200_200/0/1549336419509?e=2147483647&v=beta&t=feIcq_ZKeMNcXd9xjl7ez6TLcIA0vS-8q6vqePrnz1g)
+          | Atributo | Valor |
+          | ------ | ------ |
+          | Owner do projeto | ${{ parameters.squad }} |
+          | Projeto | ${{ parameters.project }} |
+          | Repositório do Site | fillipepaz/${{ parameters.repository }} |
+          | Ambiente | ${{ parameters.environment }} |
+          | Arquitetura | https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site |
          
         sourcePath: ./templates/outputs/gha
         targetPath: '.github/workflows'
