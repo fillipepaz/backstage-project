@@ -19,10 +19,8 @@ spec:
   parameters:
     - title: Dados do projeto
       required:
-        - distribution_name
         - repository
         - project
-        - account
       properties:
         environment:
           title: Qual ambiente deverá ser provisionado?
