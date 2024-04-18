@@ -56,11 +56,11 @@ spec:
   steps:
     - id: template
       name: Captura o template do módulo
-      if: ${{ parameters.environment === "Production" }}
+      #if: ${{ parameters.environment === "Production" }}
       action: fetch:template
       input:
         targetPath: ./templates/outputs
-        url: https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site/template
+        url: https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site/template-tf
         values:
           project: ${{ parameters.project }}
           distribution_name: ${{ parameters.distribution_name }}
