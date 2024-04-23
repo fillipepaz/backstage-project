@@ -21,6 +21,7 @@ spec:
       required:
         - repository
         - project
+        - account
       properties:
         environment:
           title: Qual ambiente deverá ser provisionado?
@@ -40,6 +41,11 @@ spec:
           title: Qual repositório contém o site estático?
           type: string
           description: Nome do repositório.
+        
+        account:
+          title: Qual o número da account que receberá a estrutura?
+          type: string
+          description: Número da account AWS.
           
     - title: Qual a squad responsável por esse projeto?
       properties:
@@ -56,7 +62,6 @@ spec:
   steps:
     - id: template_tf
       name: Captura o template do módulo terraform
-      if: ${{ parameters.environment === "Production" }}
       action: fetch:template
       input:
         targetPath: ./templates/outputs/tf
@@ -67,12 +72,11 @@ spec:
           environment: ${{ parameters.environment }}
           squad: ${{ parameters.squad }}
           repository: ${{ parameters.repository }}
-          account: "704151674151"
+          account: ${{ parameters.account }}
           org: "fillipepaz"
     
     - id: template_gha
       name: Captura o template do workflow
-      if: ${{ parameters.environment === "Production" }}
       action: fetch:template
       input:
         targetPath: ./templates/outputs/gha
@@ -83,7 +87,7 @@ spec:
           environment: ${{ parameters.environment }}
           squad: ${{ parameters.squad }}
           repository: ${{ parameters.repository }}
-          account: "704151674151"
+          account: ${{ parameters.account }}
 
     #- id: show_workspace
     #  name: Show workspace files
