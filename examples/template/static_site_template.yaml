@@ -40,7 +40,7 @@ spec:
         repository:
           title: Qual repositório contém o site estático?
           type: string
-          description: Nome do repositório.
+          description: Nome do repositório Git.
         
         account:
           title: Qual o número da account que receberá a estrutura?
