@@ -61,7 +61,7 @@ spec:
 
   steps:
     - id: template_tf
-      name: Captura o template do módulo terraform
+      name: Captura o template do módulo terraform Production
       if: ${{ parameters.environment in ["Production"] }}
       action: fetch:template
       input:
@@ -77,7 +77,7 @@ spec:
           org: "fillipepaz"
     
     - id: template_gha
-      name: Captura o template do workflow
+      name: Captura o template do workflow Production
       if: ${{ parameters.environment in ["Production"] }}
       action: fetch:template
       input:
@@ -92,7 +92,7 @@ spec:
           account: "704151674151"
     
     - id: template_tf_no_prod
-      name: Captura o template do módulo terraform
+      name: Captura o template do módulo terraform Stagging e Development
       if: ${{ parameters.environment in ["Staging", "Development"] }}
       action: fetch:template
       input:
@@ -108,7 +108,7 @@ spec:
           org: "fillipepaz"
     
     - id: template_gha_no_prod
-      name: Captura o template do workflow
+      name: Captura o template do workflow Stagging e Development
       if: ${{ parameters.environment in ["Staging", "Development"] }}
       action: fetch:template
       input:
