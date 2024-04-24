@@ -80,7 +80,7 @@ spec:
       action: fetch:template
       input:
         targetPath: ./templates/outputs/gha
-        url: https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site/template/gha
+        url: https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site/template/gha ### No parâmetro 'owner' deve ser inserida a organization que o repositório pertence.
         values:
           project: ${{ parameters.project }}
           distribution_name: ${{ parameters.distribution_name }}
@@ -99,7 +99,7 @@ spec:
       name: Create terraform PR
       action: publish:github:pull-request
       input:
-        repoUrl: github.com?owner=fillipepaz&repo=infrastructure-versioning
+        repoUrl: github.com?owner=fillipepaz&repo=infrastructure-versioning ### No parâmetro 'owner' deve ser inserida a organization que o repositório pertence.
         branchName: 'feat/${{ parameters.project }}/${{ parameters.environment }}/static-site'
         title: 'Criando Site Estático para o projeto ${{ parameters.project }} no ambiente ${{ parameters.environment }}'
         description: |
