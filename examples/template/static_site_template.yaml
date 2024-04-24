@@ -62,6 +62,7 @@ spec:
   steps:
     - id: template_tf
       name: Captura o template do módulo terraform
+      if: ${{ parameters.environment in ["Production"] }}
       action: fetch:template
       input:
         targetPath: ./templates/outputs/tf
@@ -77,6 +78,7 @@ spec:
     
     - id: template_gha
       name: Captura o template do workflow
+      if: ${{ parameters.environment in ["Production"] }}
       action: fetch:template
       input:
         targetPath: ./templates/outputs/gha
