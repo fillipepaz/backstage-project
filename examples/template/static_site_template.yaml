@@ -21,7 +21,7 @@ spec:
       required:
         - repository
         - project
-        - account
+        - environment
       properties:
         environment:
           title: Qual ambiente deverá ser provisionado?
@@ -45,7 +45,7 @@ spec:
         account:
           title: Qual o número da account que receberá a estrutura?
           type: string
-          description: Número da account AWS.
+          description: Número da account AWS. No caso desse template será utilizado caso o ambiente selecionado não seja produção.
           
     - title: Qual a squad responsável por esse projeto?
       properties:
@@ -73,12 +73,43 @@ spec:
           environment: ${{ parameters.environment }}
           squad: ${{ parameters.squad }}
           repository: ${{ parameters.repository }}
-          account: ${{ parameters.account }}
+          account: "704151674151"
           org: "fillipepaz"
     
     - id: template_gha
       name: Captura o template do workflow
       if: ${{ parameters.environment in ["Production"] }}
+      action: fetch:template
+      input:
+        targetPath: ./templates/outputs/gha
+        url: https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site/template/gha ### No parâmetro 'owner' deve ser inserida a organization que o repositório pertence.
+        values:
+          project: ${{ parameters.project }}
+          distribution_name: ${{ parameters.distribution_name }}
+          environment: ${{ parameters.environment }}
+          squad: ${{ parameters.squad }}
+          repository: ${{ parameters.repository }}
+          account: "704151674151"
+    
+    - id: template_tf_no_prod
+      name: Captura o template do módulo terraform
+      if: ${{ parameters.environment in ["Staging", "Development"] }}
+      action: fetch:template
+      input:
+        targetPath: ./templates/outputs/tf
+        url: https://github.com/fillipepaz/aws-cloudfront-module/tree/main/static-site/template/terraform
+        values:
+          project: ${{ parameters.project }}
+          distribution_name: ${{ parameters.distribution_name }}
+          environment: ${{ parameters.environment }}
+          squad: ${{ parameters.squad }}
+          repository: ${{ parameters.repository }}
+          account: ${{ parameters.account }}
+          org: "fillipepaz"
+    
+    - id: template_gha_no_prod
+      name: Captura o template do workflow
+      if: ${{ parameters.environment in ["Staging", "Development"] }}
       action: fetch:template
       input:
         targetPath: ./templates/outputs/gha
